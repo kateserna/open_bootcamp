@@ -123,18 +123,17 @@ public class Main {
     public static boolean copiarFichero (String fileIn, String fileOut){
         try {
             InputStream ficheroInicial = new FileInputStream(fileIn);
-
+            byte [] datos = null;
             try {
-                byte [] datos = ficheroInicial.readAllBytes();
-                for (byte dato : datos) {
-                    System.out.print((char)dato);
-                }
+                datos = ficheroInicial.readAllBytes();
+                ficheroInicial.close();
             }catch (Exception e){
                 System.out.println("No puedo leer el fichero: " + e.getMessage());
             }
 
-            byte [] datos = ficheroInicial.readAllBytes();
-            ficheroInicial.close();
+            for (byte dato : datos) {
+                System.out.print((char)dato);
+            }
 
             PrintStream ficheroCopiado = new PrintStream(fileOut);
             ficheroCopiado.write(datos);
